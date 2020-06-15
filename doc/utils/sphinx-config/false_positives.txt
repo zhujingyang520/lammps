@@ -354,6 +354,7 @@ cdennist
 cdof
 ceil
 Ceil
+centerline
 centro
 centroid
 Centroid
