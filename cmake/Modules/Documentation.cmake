@@ -2,8 +2,9 @@
 # Build documentation
 ###############################################################################
 option(BUILD_DOC "Build LAMMPS HTML documentation" OFF)
+
 if(BUILD_DOC)
-  # Sphinx 3.0 requires at least Python 3.5
+  # Sphinx 3.x requires at least Python 3.5
   if(CMAKE_VERSION VERSION_LESS 3.12)
     find_package(PythonInterp 3.5 REQUIRED)
     set(VIRTUALENV ${PYTHON_EXECUTABLE} -m virtualenv -p ${PYTHON_EXECUTABLE})
@@ -15,7 +16,6 @@ if(BUILD_DOC)
     set(VIRTUALENV ${Python3_EXECUTABLE} -m virtualenv -p ${Python3_EXECUTABLE})
   endif()
   find_package(Doxygen 1.8.10 REQUIRED)
-
 
   file(GLOB DOC_SOURCES ${LAMMPS_DOC_DIR}/src/[^.]*.rst)
 

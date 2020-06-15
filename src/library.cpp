@@ -2975,7 +2975,7 @@ has thrown a :ref:`C++ exception <exceptions>`.
 int lammps_has_error(void *handle) {
   LAMMPS *  lmp = (LAMMPS *) handle;
   Error * error = lmp->error;
-  return (error->get_last_error() != "") ? 1 : 0;
+  return (error->get_last_error().empty()) ? 0 : 1;
 }
 
 /** \brief Copy the last error message into the provided buffer
@@ -3009,7 +3009,7 @@ int lammps_get_last_error_message(void *handle, char * buffer, int buf_size) {
   LAMMPS *  lmp = (LAMMPS *) handle;
   Error * error = lmp->error;
 
-  if(error->get_last_error() != "") {
+  if(!error->get_last_error().empty()) {
     int error_type = error->get_last_error_type();
     strncpy(buffer, error->get_last_error().c_str(), buf_size-1);
     error->set_last_error(NULL, ERROR_NONE);
