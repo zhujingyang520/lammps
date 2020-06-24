@@ -502,6 +502,7 @@ Critchley
 crossterm
 Crowson
 Crozier
+Cryst
 Crystallogr
 Csanyi
 csh
@@ -525,6 +526,7 @@ CuH
 cuFFT
 Cummins
 Curk
+Cusentino
 customIDs
 cutbond
 cuthi
@@ -1851,6 +1853,7 @@ Mj
 mK
 mkdir
 mkv
+mliap
 mlparks
 Mniszewski
 mnt
@@ -2026,6 +2029,7 @@ Neel
 Neelov
 Negre
 nelem
+nelems
 Nelement
 Nelements
 nemd
@@ -3351,6 +3355,7 @@ xtc
 xu
 Xu
 xxt
+xxxxx
 xy
 xyz
 xz
