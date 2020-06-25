@@ -431,6 +431,86 @@ size_t utils::trim_and_count_words(const std::string & text, const std::string &
 }
 
 /* ----------------------------------------------------------------------
+   Convert string into words on whitespace while handling single and
+   double quotes.
+------------------------------------------------------------------------- */
+std::vector<std::string> utils::split_words(const std::string &text)
+{
+  std::vector<std::string> list;
+  const char *buf = text.c_str();
+  std::size_t beg = 0;
+  std::size_t len = 0;
+  char c = *buf;
+
+  while (c) {
+    // leading whitespace
+    if (c == ' ' || c == '\t' || c == '\r' ||  c == '\n' || c == '\f') {
+      c = *++buf;
+      ++beg;
+      continue;
+    };
+    len = 0;
+
+    // handle escaped/quoted text.
+    quoted:
+
+    // handle single quote
+    if (c == '\'') {
+      c = *++buf;
+      ++len;
+      while (((c != '\'') && (c != '\0'))
+             || ((c == '\\') && (buf[1] == '\''))) {
+        if ((c == '\\') && (buf[1] == '\'')) {
+          ++buf;
+          ++len;
+        }
+        c = *++buf;
+        ++len;
+      }
+      c = *++buf;
+      ++len;
+
+      // handle double quote
+    } else if (c == '"') {
+      c = *++buf;
+      ++len;
+      while (((c != '"') && (c != '\0'))
+             || ((c == '\\') && (buf[1] == '"'))) {
+        if ((c == '\\') && (buf[1] == '"')) {
+          ++buf;
+          ++len;
+        }
+        c = *++buf;
+        ++len;
+      }
+      c = *++buf;
+      ++len;
+    }
+
+    // unquoted
+    while (1) {
+      if ((c == '\'') || (c == '"')) goto quoted;
+      // skip escaped quote
+      if ((c == '\\') && ((buf[1] == '\'') || (buf[1] == '"'))) {
+        ++buf;
+        ++len;
+        c = *++buf;
+        ++len;
+      }
+      if ((c == ' ') || (c == '\t') || (c == '\r') || (c == '\n')
+          || (c == '\f') || (c == '\0')) {
+          list.push_back(text.substr(beg,len));
+          beg += len;
+          break;
+      }
+      c = *++buf;
+      ++len;
+    }
+  }
+  return list;
+}
+
+/* ----------------------------------------------------------------------
    Return whether string is a valid integer number
 ------------------------------------------------------------------------- */
 
@@ -581,6 +661,36 @@ std::string utils::get_potential_units(const std::string & path, const std::stri
     }
   }
   return "";
+}
+
+/* ----------------------------------------------------------------------
+   return bitmask of supported conversions for a given property
+------------------------------------------------------------------------- */
+int utils::get_supported_conversions(const int property)
+{
+  if (property == ENERGY) {
+    return METAL2REAL | REAL2METAL;
+  }
+  return NOCONVERT;
+}
+
+/* ----------------------------------------------------------------------
+   return conversion factor for a given property and conversion setting
+   return 0.0 if unknown.
+------------------------------------------------------------------------- */
+
+double utils::get_conversion_factor(const int property, const int conversion)
+{
+  if (property == ENERGY) {
+    if (conversion == NOCONVERT) {
+      return 1.0;
+    } else if (conversion == METAL2REAL) {
+      return 23.060549;
+    } else if (conversion == REAL2METAL) {
+      return 1.0/23.060549;
+    }
+  }
+  return 0.0;
 }
 
 /* ------------------------------------------------------------------ */

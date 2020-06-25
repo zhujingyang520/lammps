@@ -18,6 +18,7 @@
 
 #include "lmptype.h"
 #include <string>
+#include <vector>
 #include <cstdio>
 
 namespace LAMMPS_NS {
@@ -182,6 +183,20 @@ namespace LAMMPS_NS {
     size_t trim_and_count_words(const std::string & text, const std::string & separators = " \t\r\n\f");
 
     /**
+     * \brief Take text and split into non-whitespace words.
+     *
+     * This can handle single and double quotes, escaped quotes,
+     * and escaped codes within quotes, but due to using an STL
+     * container and STL strings is rather slow because of making
+     * copies. Designed for parsing command lines and similar text
+     * and not for time critical processing. Use a tokenizer for that.
+     *
+     * \param text string that should be split
+     * \return STL vector with the words
+     */
+    std::vector<std::string> split_words(const std::string &text);
+
+    /**
      * \brief Check if string can be converted to valid integer
      * \param text string that should be checked
      * \return true, if string contains valid integer, false otherwise
@@ -240,6 +255,24 @@ namespace LAMMPS_NS {
      * \return UNITS field if present
      */
     std::string get_potential_units(const std::string & path, const std::string & potential_name);
+
+    enum { NOCONVERT = 0, METAL2REAL = 1, REAL2METAL = 1<<1 };
+    enum { UNKNOWN = 0, ENERGY };
+
+    /**
+     * \brief Return bitmask of available conversion factors for a given propert
+     * \param property property to be converted
+     * \return bitmask indicating available conversions
+     */
+    int get_supported_conversions(const int property);
+
+    /**
+     * \brief Return unit conversion factor for given property and selected from/to units
+     * \param property property to be converted
+     * \param conversion constant indicating the conversion
+     * \return conversion factor
+     */
+    double get_conversion_factor(const int property, const int conversion);
   }
 }
 

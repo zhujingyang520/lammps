@@ -18,6 +18,7 @@
 #include <cstdio>
 #include <cstdlib>
 #include <string>
+#include <vector>
 
 using namespace LAMMPS_NS;
 using ::testing::Eq;
@@ -46,6 +47,24 @@ TEST(Utils, trim_and_count_words)
 TEST(Utils, count_words_with_extra_spaces)
 {
     ASSERT_EQ(utils::count_words("   some text # comment   "), 4);
+}
+
+TEST(Utils, split_words_simple)
+{
+    std::vector<std::string> list = utils::split_words("one two three");
+    ASSERT_EQ(list.size(), 3);
+}
+
+TEST(Utils, split_words_quoted)
+{
+    std::vector<std::string> list = utils::split_words("one 'two' \"three\"");
+    ASSERT_EQ(list.size(), 3);
+}
+
+TEST(Utils, split_words_escaped)
+{
+    std::vector<std::string> list = utils::split_words("1\\' '\"two\"' 3\\\"");
+    ASSERT_EQ(list.size(), 3);
 }
 
 TEST(Utils, valid_integer1)
@@ -321,4 +340,26 @@ TEST(Utils, potential_file)
 
     remove("ctest1.txt");
     remove("ctest2.txt");
+}
+
+TEST(Utils, unit_conversion)
+{
+    double factor;
+    int flag;
+
+    flag = utils::get_supported_conversions(utils::UNKNOWN);
+    ASSERT_EQ(flag, utils::NOCONVERT);
+    flag = utils::get_supported_conversions(utils::ENERGY);
+    ASSERT_EQ(flag, utils::METAL2REAL | utils::REAL2METAL);
+
+    factor = utils::get_conversion_factor(utils::UNKNOWN, 1 << 30 - 1);
+    ASSERT_DOUBLE_EQ(factor, 0.0);
+    factor = utils::get_conversion_factor(utils::UNKNOWN, utils::NOCONVERT);
+    ASSERT_DOUBLE_EQ(factor, 0.0);
+    factor = utils::get_conversion_factor(utils::ENERGY, utils::NOCONVERT);
+    ASSERT_DOUBLE_EQ(factor, 1.0);
+    factor = utils::get_conversion_factor(utils::ENERGY, utils::METAL2REAL);
+    ASSERT_DOUBLE_EQ(factor, 23.060549);
+    factor = utils::get_conversion_factor(utils::ENERGY, utils::REAL2METAL);
+    ASSERT_DOUBLE_EQ(factor, 1.0 / 23.060549);
 }

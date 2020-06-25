@@ -1787,6 +1787,7 @@ mem
 memalign
 MEMALIGN
 membered
+memcheck
 Mendelev
 mer
 Meremianin
