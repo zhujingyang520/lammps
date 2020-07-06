@@ -765,6 +765,7 @@ Eebt
 ees
 eFF
 efield
+effm
 eflux
 eg
 Eggebrecht
@@ -2118,6 +2119,7 @@ Novint
 np
 Npair
 Npairs
+nparams
 nparticle
 npernode
 nph
