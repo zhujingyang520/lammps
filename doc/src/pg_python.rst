@@ -24,6 +24,8 @@ There are multiple Python interface classes in the :py:mod:`lammps` module:
   features to conveniently include LAMMPS into `Jupyter
   <https://jupyter.org/>`_ notebooks.
 
+.. _mpi4py: https://mpi4py.readthedocs.io
+
 ----------
 
 Creating or deleting a LAMMPS object
