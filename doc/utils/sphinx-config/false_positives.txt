@@ -887,6 +887,7 @@ evalue
 Evanseck
 evdwl
 Everaers
+Evgeny
 evirials
 ewald
 Ewald
@@ -1095,6 +1096,7 @@ GPa
 gpu
 gpuID
 gpus
+gradgradflag
 gradV
 GradVidottan
 graining
@@ -1511,6 +1513,7 @@ Kumar
 Kuronen
 Kusters
 Kutta
+Kuznetsov
 kx
 Lackmann
 Ladd
@@ -2063,6 +2066,7 @@ nhc
 NiAlH
 Nicklas
 Niklasson
+Nikolskiy
 nimpropers
 Nimpropertype
 Ninteger
@@ -2094,6 +2098,7 @@ nodeless
 nodeset
 nodesets
 Noehring
+Noffset
 noforce
 Noid
 nolib
@@ -3255,6 +3260,7 @@ Voth
 vpz
 vratio
 Vries
+Vsevolod
 Vsmall
 Vstream
 vtarget
@@ -3297,6 +3303,8 @@ whitesmoke
 whitespace
 Wi
 Wicaksono
+Widom
+widom
 Wijk
 Wikipedia
 wildcard
