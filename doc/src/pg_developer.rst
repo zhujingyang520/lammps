@@ -113,7 +113,7 @@ care has to be taken, that suitable communicators are used to not
 create conflicts between different instances.
 
 The LAMMPS class currently holds instances of 19 classes representing
-different core functionalities 
+different core functionalities
 There are a handful of virtual parent classes in LAMMPS that define
 what LAMMPS calls ``styles``.  They are shaded red in Fig
 \ref{fig:classes}.  Each of these are parents of a number of child
