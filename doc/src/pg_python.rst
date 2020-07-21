@@ -24,7 +24,7 @@ There are multiple Python interface classes in the :py:mod:`lammps` module:
   features to conveniently include LAMMPS into `Jupyter
   <https://jupyter.org/>`_ notebooks.
 
-.. _mpi4py: https://mpi4py.readthedocs.io
+.. _mpi4py_url: https://mpi4py.readthedocs.io
 
 ----------
 
@@ -45,7 +45,7 @@ installed or used.  The *ptr* argument is for use of the
 :doc:`python <python>` command, where a pointer to the already existing
 :cpp:class:`LAMMPS <LAMMPS_NS::LAMMPS>` class instance can be passed
 to the Python class and used instead of creating a new instance.  The
-*comm* argument may be used in combination with the `mpi4py <mpi4py_>`_
+*comm* argument may be used in combination with the `mpi4py <mpi4py_url_>`_
 module to pass an MPI communicator to LAMMPS and thus it is possible
 to run the Python module like the library interface on a subset of the
 MPI ranks after splitting the communicator. Here is a simple example:

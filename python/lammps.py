@@ -124,7 +124,7 @@ class NeighList:
 class lammps(object):
   """Create an instance of the LAMMPS Python class.
 
-  .. _mpi4py: https://mpi4py.readthedocs.io/
+  .. _mpi4py_docs: https://mpi4py.readthedocs.io/
 
   This is a Python wrapper class that exposes the LAMMPS C-library
   interface to Python.  It either requires that LAMMPS has been compiled
@@ -144,7 +144,7 @@ class lammps(object):
   :type  cmdargs: list
   :param ptr: pointer to a LAMMPS C++ class instance when called from an embedded Python interpreter.  None means load symbols from shared library.
   :type  ptr: pointer
-  :param comm: MPI communicator (as provided by `mpi4py <mpi4py_>`_). ``None`` means use ``MPI_COMM_WORLD`` implicitly.
+  :param comm: MPI communicator (as provided by `mpi4py <mpi4py_docs_>`_). ``None`` means use ``MPI_COMM_WORLD`` implicitly.
   :type  comm: MPI_Comm
   """
 
