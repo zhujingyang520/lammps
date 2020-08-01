@@ -238,6 +238,7 @@ bilayer
 bilayers
 binsize
 binstyle
+binutils
 biomolecular
 biomolecule
 Biomolecules
