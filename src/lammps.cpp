@@ -877,9 +877,6 @@ void LAMMPS::destroy()
   delete neighbor;
   neighbor = NULL;
 
-  delete comm;
-  comm = NULL;
-
   delete force;
   force = NULL;
 
@@ -892,6 +889,10 @@ void LAMMPS::destroy()
   delete modify;          // modify must come after output, force, update
                           //   since they delete fixes
   modify = NULL;
+
+  delete comm;            // comm must come after modify
+                          //   since fix destructors may access comm
+  comm = NULL;
 
   delete domain;          // domain must come after modify
                           //   since fix destructors access domain
