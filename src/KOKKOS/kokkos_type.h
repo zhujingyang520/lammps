@@ -33,6 +33,12 @@ enum{FULL=1u,HALFTHREAD=2u,HALF=4u};
 #define LMP_KOKKOS_GPU
 #endif
 
+#if defined(LMP_KOKKOS_GPU)
+#define KOKKOS_GPU_ARG(x) x
+#else
+#define KOKKOS_GPU_ARG(x)
+#endif
+
 #define MAX_TYPES_STACKPARAMS 12
 #define NeighClusterSize 8
 
@@ -1058,7 +1064,7 @@ struct alignas(2*sizeof(real)) SNAComplex
 {
   real re,im;
 
-  KOKKOS_FORCEINLINE_FUNCTION SNAComplex() = default;
+  SNAComplex() = default;
 
   KOKKOS_FORCEINLINE_FUNCTION SNAComplex(real re)
    : re(re), im(static_cast<real>(0.)) { ; }
@@ -1100,6 +1106,17 @@ KOKKOS_FORCEINLINE_FUNCTION SNAComplex<real> operator*(const real& r, const SNAC
 
 typedef SNAComplex<SNAreal> SNAcomplex;
 
+// Cayley-Klein pack
+// Can guarantee it's aligned to 2 complex
+struct alignas(32) CayleyKleinPack {
+
+  SNAcomplex a, b;
+  SNAcomplex da[3], db[3];
+  SNAreal sfac;
+  SNAreal dsfacu[3];
+
+};
+
 
 #if defined(KOKKOS_ENABLE_CXX11)
 #undef ISFINITE
@@ -1110,6 +1127,12 @@ typedef SNAComplex<SNAreal> SNAcomplex;
 #define LAMMPS_LAMBDA [=] __device__
 #else
 #define LAMMPS_LAMBDA [=]
+#endif
+
+#ifdef LMP_KOKKOS_GPU
+#if defined(__CUDA_ARCH__) || defined(__HIP_DEVICE_COMPILE__)
+#define LMP_KK_DEVICE_COMPILE
+#endif
 #endif
 
 #endif
