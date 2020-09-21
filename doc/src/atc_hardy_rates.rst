@@ -32,7 +32,7 @@ Syntax
   - internal_energy : total internal energy (potential + thermal) per unit volume
   - energy : total energy (potential + kinetic) per unit volume
   - number_density : number of atoms per unit volume
-  - eshelby_stress : configurational stress (energy-momentum) tensor defined by [Eshelby]_
+  - eshelby_stress : configurational stress (energy-momentum) tensor defined by [Eshelby1951]_
   - vacancy_concentration : volume fraction of vacancy content
   - type_concentration : volume fraction of a specific atom type
 

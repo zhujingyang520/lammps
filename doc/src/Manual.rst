@@ -87,6 +87,7 @@ Programmer Documentation
    dihedrals
    impropers
    fix_modify_atc_commands
+   bibliography
 
 Indices and tables
 ******************

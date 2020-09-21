@@ -688,14 +688,3 @@ ploop = 1, nreset = 0, drag = 0.0, dilate = all, couple = none,
 flip = yes, scaleyz = scalexz = scalexy = yes if periodic in second
 dimension and not coupled to barostat, otherwise no.
 
-----------
-
-.. [Martyna1994] Martyna, Tobias and Klein, J Chem Phys, 101, 4177 (1994).
-
-.. [Parrinello1981] Parrinello and Rahman, J Appl Phys, 52, 7182 (1981).
-
-.. [Tuckerman2006] Tuckerman, Alejandre, Lopez-Rendon, Jochim, and Martyna, J Phys A: Math Gen, 39, 5629 (2006).
-
-.. [Shinoda2004] Shinoda, Shiga, and Mikami, Phys Rev B, 69, 134103 (2004).
-
-.. [Dullweber1997] Dullweber, Leimkuhler and McLachlan, J Chem Phys, 107, 5840 (1997).
