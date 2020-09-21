@@ -55,7 +55,7 @@ e.g. spheroids via use of the :doc:`atom_style hybrid sphere dipole <atom_style>
 
 The default dipole orientation integrator can be changed to the
 Dullweber-Leimkuhler-McLachlan integration scheme
-:ref:`(Dullweber) <nh-Dullweber>` when using *update* with the value
+[Dullweber1997]_ when using *update* with the value
 *dipole/dlm*\ . This integrator is symplectic and time-reversible,
 giving better energy conservation and allows slightly longer timesteps
 at only a small additional computational cost.
@@ -105,10 +105,3 @@ Default
 """""""
 
 none
-
-----------
-
-.. _nve-Dullweber:
-
-**(Dullweber)** Dullweber, Leimkuhler and McLachlan, J Chem Phys, 107,
-5840 (1997).

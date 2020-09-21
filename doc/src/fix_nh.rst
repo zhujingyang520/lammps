@@ -110,13 +110,12 @@ correctly, the time-averaged temperature and stress tensor of the
 particles will match the target values specified by Tstart/Tstop and
 Pstart/Pstop.
 
-The equations of motion used are those of Shinoda et al in
-:ref:`(Shinoda) <nh-Shinoda>`, which combine the hydrostatic equations of
-Martyna, Tobias and Klein in :ref:`(Martyna) <nh-Martyna>` with the strain
-energy proposed by Parrinello and Rahman in
-:ref:`(Parrinello) <nh-Parrinello>`.  The time integration schemes closely
-follow the time-reversible measure-preserving Verlet and rRESPA
-integrators derived by Tuckerman et al in :ref:`(Tuckerman) <nh-Tuckerman>`.
+The equations of motion used are those of Shinoda et al in [Shinoda2004]_,
+which combine the hydrostatic equations of Martyna, Tobias and Klein in
+[Martyna1994]_ with the strain energy proposed by Parrinello and Rahman in
+[Parrinello1981]_.  The time integration schemes closely follow
+the time-reversible measure-preserving Verlet and rRESPA integrators derived
+by Tuckerman et al in [Tuckerman2006]_.
 
 ----------
 
@@ -209,7 +208,7 @@ The relaxation rate of the barostat is set by its inertia :math:`W`:
    W = (N + 1) k T_{\rm target} P_{\rm damp}^2
 
 where :math:`N` is the number of atoms, :math:`k` is the Boltzmann constant,
-and :math:`T_{\rm target}` is the target temperature of the barostat :ref:`(Martyna) <nh-Martyna>`.
+and :math:`T_{\rm target}` is the target temperature of the barostat [Martyna1994]_.
 If a thermostat is defined, :math:`T_{\rm target}` is the target temperature
 of the thermostat. If a thermostat is not defined, :math:`T_{\rm target}`
 is set to the current temperature of the system when the barostat is initialized.
@@ -327,7 +326,7 @@ barostat variables.
 
 The *mtk* keyword controls whether or not the correction terms due to
 Martyna, Tuckerman, and Klein are included in the equations of motion
-:ref:`(Martyna) <nh-Martyna>`.  Specifying *no* reproduces the original
+[Martyna1994]_.  Specifying *no* reproduces the original
 Hoover barostat, whose volume probability distribution function
 differs from the true NPT and NPH ensembles by a factor of 1/V.  Hence
 using *yes* is more correct, but in many cases the difference is
@@ -337,7 +336,7 @@ The keyword *tloop* can be used to improve the accuracy of integration
 scheme at little extra cost.  The initial and final updates of the
 thermostat variables are broken up into *tloop* sub-steps, each of
 length *dt*\ /\ *tloop*\ . This corresponds to using a first-order
-Suzuki-Yoshida scheme :ref:`(Tuckerman) <nh-Tuckerman>`.  The keyword *ploop*
+Suzuki-Yoshida scheme [Tuckerman2006]_.  The keyword *ploop*
 does the same thing for the barostat thermostat.
 
 The keyword *nreset* controls how often the reference dimensions used
@@ -390,11 +389,10 @@ where a dipole moment is assigned to finite-size particles,
 e.g. spheroids via use of the :doc:`atom_style hybrid sphere dipole <atom_style>` command.
 
 The default dipole orientation integrator can be changed to the
-Dullweber-Leimkuhler-McLachlan integration scheme
-:ref:`(Dullweber) <nh-Dullweber>` when using *update* with the value
-*dipole/dlm*\ . This integrator is symplectic and time-reversible,
-giving better energy conservation and allows slightly longer timesteps
-at only a small additional computational cost.
+Dullweber-Leimkuhler-McLachlan integration scheme [Dullweber1997]_
+when using *update* with the value *dipole/dlm*\ . This integrator is
+symplectic and time-reversible, giving better energy conservation and allows
+slightly longer timesteps at only a small additional computational cost.
 
 ----------
 
@@ -692,24 +690,12 @@ dimension and not coupled to barostat, otherwise no.
 
 ----------
 
-.. _nh-Martyna:
+.. [Martyna1994] Martyna, Tobias and Klein, J Chem Phys, 101, 4177 (1994).
 
-**(Martyna)** Martyna, Tobias and Klein, J Chem Phys, 101, 4177 (1994).
+.. [Parrinello1981] Parrinello and Rahman, J Appl Phys, 52, 7182 (1981).
 
-.. _nh-Parrinello:
+.. [Tuckerman2006] Tuckerman, Alejandre, Lopez-Rendon, Jochim, and Martyna, J Phys A: Math Gen, 39, 5629 (2006).
 
-**(Parrinello)** Parrinello and Rahman, J Appl Phys, 52, 7182 (1981).
+.. [Shinoda2004] Shinoda, Shiga, and Mikami, Phys Rev B, 69, 134103 (2004).
 
-.. _nh-Tuckerman:
-
-**(Tuckerman)** Tuckerman, Alejandre, Lopez-Rendon, Jochim, and
-Martyna, J Phys A: Math Gen, 39, 5629 (2006).
-
-.. _nh-Shinoda:
-
-**(Shinoda)** Shinoda, Shiga, and Mikami, Phys Rev B, 69, 134103 (2004).
-
-.. _nh-Dullweber:
-
-**(Dullweber)** Dullweber, Leimkuhler and McLachlan, J Chem Phys, 107,
-5840 (1997).
+.. [Dullweber1997] Dullweber, Leimkuhler and McLachlan, J Chem Phys, 107, 5840 (1997).
