@@ -55,7 +55,6 @@ struct TagPPPM_setup2{};
 struct TagPPPM_setup3{};
 struct TagPPPM_setup4{};
 struct TagPPPM_compute_gf_ik{};
-struct TagPPPM_compute_gf_ik_triclinic{};
 struct TagPPPM_self1{};
 struct TagPPPM_self2{};
 struct TagPPPM_brick2fft{};
@@ -73,12 +72,6 @@ struct TagPPPM_poisson_ik7{};
 struct TagPPPM_poisson_ik8{};
 struct TagPPPM_poisson_ik9{};
 struct TagPPPM_poisson_ik10{};
-struct TagPPPM_poisson_ik_triclinic1{};
-struct TagPPPM_poisson_ik_triclinic2{};
-struct TagPPPM_poisson_ik_triclinic3{};
-struct TagPPPM_poisson_ik_triclinic4{};
-struct TagPPPM_poisson_ik_triclinic5{};
-struct TagPPPM_poisson_ik_triclinic6{};
 struct TagPPPM_poisson_peratom1{};
 struct TagPPPM_poisson_peratom2{};
 struct TagPPPM_poisson_peratom3{};
@@ -116,14 +109,14 @@ class PPPMKokkos : public PPPM, public KokkosBaseFFT {
 
   PPPMKokkos(class LAMMPS *);
   virtual ~PPPMKokkos();
-  virtual void init();
-  virtual void setup();
+  void init();
+  void setup();
   void setup_grid();
-  virtual void settings(int, char **);
-  virtual void compute(int, int);
-  virtual int timing_1d(int, double &);
-  virtual int timing_3d(int, double &);
-  virtual double memory_usage();
+  void settings(int, char **);
+  void compute(int, int);
+  int timing_1d(int, double &);
+  int timing_3d(int, double &);
+  double memory_usage();
 
   KOKKOS_INLINE_FUNCTION
   void operator()(TagPPPM_setup1, const int&) const;
@@ -139,9 +132,6 @@ class PPPMKokkos : public PPPM, public KokkosBaseFFT {
 
   KOKKOS_INLINE_FUNCTION
   void operator()(TagPPPM_compute_gf_ik, const int&) const;
-
-  KOKKOS_INLINE_FUNCTION
-  void operator()(TagPPPM_compute_gf_ik_triclinic, const int&) const;
 
   KOKKOS_INLINE_FUNCTION
   void operator()(TagPPPM_self1, const int&) const;
@@ -193,24 +183,6 @@ class PPPMKokkos : public PPPM, public KokkosBaseFFT {
 
   KOKKOS_INLINE_FUNCTION
   void operator()(TagPPPM_poisson_ik10, const int&) const;
-
-  KOKKOS_INLINE_FUNCTION
-  void operator()(TagPPPM_poisson_ik_triclinic1, const int&) const;
-
-  KOKKOS_INLINE_FUNCTION
-  void operator()(TagPPPM_poisson_ik_triclinic2, const int&) const;
-
-  KOKKOS_INLINE_FUNCTION
-  void operator()(TagPPPM_poisson_ik_triclinic3, const int&) const;
-
-  KOKKOS_INLINE_FUNCTION
-  void operator()(TagPPPM_poisson_ik_triclinic4, const int&) const;
-
-  KOKKOS_INLINE_FUNCTION
-  void operator()(TagPPPM_poisson_ik_triclinic5, const int&) const;
-
-  KOKKOS_INLINE_FUNCTION
-  void operator()(TagPPPM_poisson_ik_triclinic6, const int&) const;
 
   KOKKOS_INLINE_FUNCTION
   void operator()(TagPPPM_poisson_peratom1, const int&) const;
@@ -369,35 +341,27 @@ class PPPMKokkos : public PPPM, public KokkosBaseFFT {
   //double *boxlo;
   double boxlo[3];
 
-  void set_grid_global();
   void set_grid_local();
-  void adjust_gewald();
-  double newton_raphson_f();
-  double derivf();
-  double final_accuracy();
 
-  virtual void allocate();
-  virtual void allocate_peratom();
-  virtual void deallocate();
-  virtual void deallocate_peratom();
-  int factorable(int);
-  double compute_df_kspace();
-  double estimate_ik_error(double, double, bigint);
-  virtual void compute_gf_denom();
-  virtual void compute_gf_ik();
+  void allocate();
+  void allocate_peratom();
+  void deallocate();
+  void deallocate_peratom();
+  void compute_gf_denom();
+  void compute_gf_ik();
 
-  virtual void particle_map();
-  virtual void make_rho();
-  virtual void brick2fft();
+  void particle_map();
+  void make_rho();
+  void brick2fft();
 
-  virtual void poisson();
-  virtual void poisson_ik();
+  void poisson();
+  void poisson_ik();
 
-  virtual void fieldforce();
-  virtual void fieldforce_ik();
+  void fieldforce();
+  void fieldforce_ik();
 
-  virtual void poisson_peratom();
-  virtual void fieldforce_peratom();
+  void poisson_peratom();
+  void fieldforce_peratom();
   void procs2grid2d(int,int,int,int *, int*);
 
   KOKKOS_INLINE_FUNCTION
@@ -416,9 +380,6 @@ class PPPMKokkos : public PPPM, public KokkosBaseFFT {
   // triclinic
 
   int triclinic;               // domain settings, orthog or triclinic
-  void setup_triclinic();
-  void compute_gf_ik_triclinic();
-  void poisson_ik_triclinic();
 
 /* ----------------------------------------------------------------------
    denominator for Hockney-Eastwood Green's function
